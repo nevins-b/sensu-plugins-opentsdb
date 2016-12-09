@@ -13,7 +13,6 @@
 #
 # DEPENDENCIES:
 #   gem: sensu-plugin
-#   gem: jsonpath
 #   gem: json
 #   gem: dentaku
 #
@@ -121,7 +120,7 @@ class CheckOpenTSDBQuery < Sensu::Plugin::Check::CLI
     url = "#{schema}://#{config[:host]}:#{config[:port]}/api/query?m=#{config[:query]}&start=#{config[:start]}"
     URI.parse(url)
   end
-  
+
   def run
     url = opentsdb_url()
 
@@ -141,7 +140,7 @@ class CheckOpenTSDBQuery < Sensu::Plugin::Check::CLI
       metric = metric.first
     end
     value =metric["dps"].values[0]
-    
+
     if config[:noresult] && value.empty?
       critical "No result for query '#{query}'"
     end
